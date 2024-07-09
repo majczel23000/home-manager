@@ -1,4 +1,38 @@
 .shopping-list-details {
+    .mat-accordion {
+      border-radius: 0 !important;
+    }
+
+    .mat-expansion-panel {
+      margin: 8px 0 !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+    }
+
+    .mat-expansion-panel-body {
+      padding: 0 !important;
+    }
+
+    .mat-expansion-panel-header {
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+      padding-left: 10px;
+
+      span {
+        padding: 10px;
+      }
+    }
+
+    .mat-expansion-panel-header, .mat-expansion-panel-header:hover {
+      background: cornflowerblue !important;
+      height: auto !important;
+      border-radius: 0 !important;
+    }
+
+    .mdc-list-item__content {
+      pointer-events: all !important;
+    }
+
     .mdc-list-group__subheader {
         margin: 0;
     }
@@ -15,11 +49,11 @@
         flex-direction: row !important;
         justify-content: space-between !important;
     }
-    
+
     .mat-list-base {
         padding-top: 0 !important;
     }
-    
+
     .details-wrapper {
         display: flex;
         width: 100%;
@@ -29,13 +63,14 @@
 
     .details-quantity {
         width: 10%;
-        font-size: 0.9em !important;
         border-right: 1px solid black;
         display: flex;
         justify-content: center;
         align-items: center;
         padding: 0 3px;
-    
+        height: 100%;
+        text-wrap: wrap;
+
         @media screen and (max-width: 800px) {
             width: 15%;
         }
@@ -44,10 +79,10 @@
         }
         @media screen and (max-width: 450px) {
             width: 20%;
-            font-size: 0.8em !important;
+            font-size: 0.9em !important;
         }
         @media screen and (max-width: 350px) {
-            width: 30%;
+            width: 20%;
         }
     }
 
@@ -58,20 +93,64 @@
         display: flex;
         align-items: center;
         padding: 0 10px;
+        height: 100%;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
 
         @media screen and (max-width: 800px) {
-            width: 75%;
+            width: 85%;
         }
         @media screen and (max-width: 550px) {
-            width: 71%;
+            width: 83%;
         }
         @media screen and (max-width: 450px) {
-            width: 65%;
-            font-size: 0.8em !important;
+            width: 80%;
+            font-size: 0.9em !important;
         }
         @media screen and (max-width: 350px) {
-            width: 55%;
+            width: 70%;
         }
+    }
+
+    .details-info {
+      width: 90%;
+      display: flex;
+      align-items: center;
+
+      @media screen and (max-width: 800px) {
+        width: 90%;
+      }
+      @media screen and (max-width: 550px) {
+        width: 88%;
+      }
+      @media screen and (max-width: 450px) {
+        width: 85%;
+        font-size: 0.8em !important;
+      }
+      @media screen and (max-width: 350px) {
+        width: 85%;
+      }
+
+      mat-form-field {
+        width: 100%;
+
+        .mat-mdc-form-field-subscript-wrapper {
+          display: none;
+        }
+
+        .mdc-text-field--filled {
+          background-color: lightgray !important;
+          border-radius: 0 !important;
+        }
+
+        .mat-mdc-form-field-infix {
+          padding: 12px 0 !important;
+          min-height: auto !important;
+        }
+      }
     }
 
     .details-button {
@@ -91,35 +170,11 @@
             width: 15%;
         }
     }
-    
-    .add-shopping-list {
-        mat-form-field {
-            width: 100%;
-        }
-    
-        input {
-            font-size: 1.1em;
-        }
-    
-        button {
-            margin: 0 auto;
-            display: block;
-        }
-    
-        mat-icon {
-            width: 40px !important;
-            height: 40px !important;
-            font-size: 40px !important;
-            line-height: 40px !important;
-        }
-    }
-    
+
     .details-category-title {
         font-size: 1rem;
-        font-weight: bold;
-        padding: 2px 10px;
+        font-weight: 500;
         background: cornflowerblue;
         text-transform: uppercase;
     }
 }
-  

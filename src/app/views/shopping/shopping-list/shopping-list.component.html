@@ -1,0 +1,68 @@
+<app-current-location [location]="'Lista zakupów'"></app-current-location>
+
+@if(!isLoading) {
+  <div class="shopping-list-details">
+    <mat-accordion multi>
+
+      @for (section of elementsAndCategories; track sectionIndex; let sectionIndex = $index) {
+        <mat-expansion-panel expanded>
+          <mat-expansion-panel-header>
+            <mat-panel-title class="details-category-title">
+              {{ section.category }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          @for (element of section?.elements; track elementIndex; let elementIndex = $index) {
+            <mat-list-item [style.background-color]="element.isAdded ? '#ffa7a1' : ''">
+              <div class="details-wrapper" >
+                <div class="details-info"
+                     (pointerdown)="startClickEvent()"
+                     (pointerup)="endClickEvent(sectionIndex, elementIndex, element.id!)"
+                     (contextmenu)="$event.preventDefault()">
+                  @if (!element.editMode) {
+                    <div class="details-quantity">
+                      {{ element.quantity }}
+                    </div>
+                    <div class="details-item" [style.text-decoration]="element.isAdded ? 'line-through' : ''">
+                      {{ element.item }}
+                    </div>
+                  }
+                  @else {
+                    <div class="details-quantity">
+                      <mat-form-field>
+                        <input matInput placeholder="Ilość" [(ngModel)]="editElement.quantity" name="item" autocomplete="off">
+                      </mat-form-field>
+                    </div>
+                    <div class="details-item" [style.text-decoration]="element.isAdded ? 'line-through' : ''">
+                      <mat-form-field>
+                        <input matInput placeholder="Produkt" [(ngModel)]="editElement.item" name="item" autocomplete="off">
+                      </mat-form-field>
+                    </div>
+                  }
+                </div>
+                @if (!element.editMode) {
+                  <button class="details-button" mat-icon-button color="warn" (click)="removeItem($event, element.id!)">
+                    <mat-icon class="material-icons">close</mat-icon>
+                  </button>
+                }
+                @else {
+                  <button class="details-button" mat-icon-button color="primary" (click)="saveEditedItem($event, sectionIndex, elementIndex, element.id!)">
+                    <mat-icon class="material-icons">done</mat-icon>
+                  </button>
+                }
+              </div>
+            </mat-list-item>
+          }
+
+        </mat-expansion-panel>
+      }
+
+    </mat-accordion>
+
+    <app-shopping-list-add [categories]="categories"></app-shopping-list-add>
+
+  </div>
+}
+@else {
+  <mat-spinner></mat-spinner>
+}

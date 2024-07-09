@@ -1,7 +1,15 @@
-<mat-toolbar color="primary">
-  <button mat-icon-button (click)="sideNav?.toggle()">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <h1>My Home Manager</h1>
-  <button [style.visibility]="backButtonVisibility ? 'visible' : 'hidden'" mat-raised-button (click)="goBack()">Wstecz</button>
-</mat-toolbar>
+@if (authService.authState$ | async) {
+  <mat-toolbar color="primary">
+    <button mat-icon-button (click)="sideNav?.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1>My Home Manager</h1>
+    <button [style.visibility]="backButtonVisibility ? 'visible' : 'hidden'" mat-raised-button (click)="goBack()">Wstecz</button>
+  </mat-toolbar>
+}
+@else {
+  <mat-toolbar color="primary" [style.justify-content]="'center'">
+    <h1>My Home Manager</h1>
+  </mat-toolbar>
+}
+

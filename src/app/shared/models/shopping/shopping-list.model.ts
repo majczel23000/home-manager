@@ -9,5 +9,6 @@ export interface ProductModel {
   item: string;
   quantity: string;
   category: string;
-  id?: number;
+  id?: string;
+  editMode?: boolean;
 }

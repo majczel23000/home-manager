@@ -5,6 +5,7 @@ export interface CategoryProductModel {
         item?: string;
         quantity?: string;
         category?: string;
-        id?: number;
+        id?: string;
+        editMode?: boolean;
     }[];
 }

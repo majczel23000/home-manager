@@ -18,7 +18,7 @@ describe('DashboardComponent', () => {
       ],
     })
     .compileComponents();
-    
+
     router = TestBed.inject(Router);
     fixture = TestBed.createComponent(DashboardComponent);
     component = fixture.componentInstance;
@@ -29,10 +29,10 @@ describe('DashboardComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render shopping lists on first place with text \'Listy zakupów\'', () => {
+  it('should render shopping lists on first place with text \'Lista zakupów\'', () => {
     const items = fixture.debugElement.queryAll(By.css('mat-card'));
     const itemParagraph = items[0].query(By.css('p'));
-    expect(itemParagraph.nativeElement.innerText).toBe('Listy zakupów');
+    expect(itemParagraph.nativeElement.innerText).toBe('Lista zakupów');
   });
 
   it('should render shopping lists on first place with text \'Pożyczki / Długi\'', () => {
