@@ -1,17 +1,30 @@
-<section class="add-shopping-list">
-  <h3>Dodaj nową listę zakupów:</h3>
-  <form>
-    <mat-form-field>
-      <mat-label>Nazwa listy zakupów</mat-label>
-      <input matInput [(ngModel)]="shoppingListToAdd.name" name="item">
-    </mat-form-field>
+<form class="add-shopping-list main-padding-20">
+  <mat-form-field>
+    <mat-label>Produkt</mat-label>
+    <input matInput placeholder="Produkt" [(ngModel)]="addedProduct.item" name="item" autocomplete="off">
+  </mat-form-field>
 
-    <button 
-      mat-raised-button
-      color="primary"
-      (click)="addNewShoppingList()"
-      [disabled]="isAddButtonDisabled()">
-      Dodaj
-    </button>
-  </form>
-</section>
+  <mat-form-field>
+    <mat-label>Ilość</mat-label>
+    <input matInput placeholder="Ilość" [(ngModel)]="addedProduct.quantity" name="quantity" autocomplete="off">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Kategoria</mat-label>
+    <mat-select [(ngModel)]="addedProduct.category" name="category">
+      @for (category of categories; track category) {
+        <mat-option [value]="category.name">
+          {{ category.name }}
+        </mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="addNewProduct()"
+    [disabled]="isAddButtonDisabled()">
+    Dodaj nowy produkt
+  </button>
+</form>

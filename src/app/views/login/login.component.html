@@ -1,0 +1,25 @@
+<mat-card>
+  <mat-card-content>
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+      <h2>Zaloguj się</h2>
+      @if (error) {
+        <mat-error>
+          Błędne dane logowania
+        </mat-error>
+      }
+      <mat-form-field>
+        <input matInput type="text" placeholder="Login" [(ngModel)]="login" name="login" required>
+        <mat-error>
+          Proszę wprowadzić login
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="password" placeholder="Hasło" [(ngModel)]="password" name="password" required>
+        <mat-error>
+          Proszę wprowadzić hasło
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" [disabled]="!loginForm.form.valid || loginInProgress">Zaloguj</button>
+    </form>
+  </mat-card-content>
+</mat-card>

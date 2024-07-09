@@ -1,26 +1,32 @@
 import { Routes } from '@angular/router';
-import { DashboardComponent } from './views/dashboard/dashboard.component';
+import { LoginComponent } from './views/login/login.component';
+import { AuthGuard } from './shared/guards/auth.guard';
+import { LoggedInGuard } from './shared/guards/logged-in.guard';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        component: DashboardComponent,
+        canActivate: [LoggedInGuard],
+        component: LoginComponent,
+    },
+    {
+        path: 'dashboard',
+        canActivate: [AuthGuard],
+        loadComponent: () => import('./views/dashboard/dashboard.component').then(mod => mod.DashboardComponent),
     },
     {
         path: 'shopping',
+        canActivate: [AuthGuard],
         children: [
             {
                 path: '',
-                loadComponent: () => import('./views/shopping/shopping-dashboard/shopping-dashboard.component').then(mod => mod.ShoppingDashboardComponent),
+                loadComponent: () => import('./views/shopping/shopping-list/shopping-list.component').then(mod => mod.ShoppingListComponent),
             },
-            {
-                path: ':id',
-                loadComponent: () => import('./views/shopping/shopping-list-details/shopping-list-details.component').then(mod => mod.ShoppingListDetailsComponent),
-            }
         ]
     },
     {
         path: 'loans',
+        canActivate: [AuthGuard],
         children: [
             {
                 path: '',

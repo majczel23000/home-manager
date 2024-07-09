@@ -18,7 +18,6 @@ export class DashboardComponent {
   protected router = inject(Router);
 
   public goTo(route: string): void {
-    console.log(route);
     this.router.navigateByUrl(route);
   }
 

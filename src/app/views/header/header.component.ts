@@ -6,6 +6,8 @@ import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { MatMenuModule } from "@angular/material/menu";
 import { MatIconModule } from '@angular/material/icon';
 import { filter } from 'rxjs';
+import { AuthService } from '../../shared/services/login/auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   standalone: true,
@@ -15,6 +17,7 @@ import { filter } from 'rxjs';
     RouterModule,
     MatMenuModule,
     MatIconModule,
+    CommonModule,
   ],
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -25,6 +28,7 @@ export class HeaderComponent implements OnInit {
   @Input() sideNav: MatSidenav | undefined;
 
   protected router = inject(Router);
+  protected authService = inject(AuthService);
 
   public backButtonVisibility = false;
 
@@ -32,7 +36,7 @@ export class HeaderComponent implements OnInit {
     this.router.events
       .pipe(
         filter((event: any) => event instanceof NavigationEnd)
-      ).subscribe((event: any) => this.backButtonVisibility = event.url !== '/');
+      ).subscribe((event: any) => this.backButtonVisibility = event.url !== '/dashboard');
   }
 
   public goBack(): void {

@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { AngularFirestore, DocumentReference } from '@angular/fire/compat/firestore';
 import { map, Observable } from 'rxjs';
-import { ShoppingListModel } from '../../models/shopping/shopping-list.model';
+import { ProductModel } from '../../models/shopping/shopping-list.model';
 import { CategoryModel } from '../../models/shopping/category.model';
 
 @Injectable({
@@ -11,39 +11,32 @@ export class ShoppingListService {
 
   protected firestore = inject(AngularFirestore);
 
-  // Get all shopping lists
-  getShoppingLists(): Observable<ShoppingListModel[]> {
-    return this.firestore.collection('shopping-lists').snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c => ({ id: c.payload.doc.id, ...(c.payload.doc.data() as ShoppingListModel) }))
-      )
+  // Get shopping list details
+  getShoppingList(): Observable<ProductModel[]> {
+    return this.firestore.collection('shoppinglist').snapshotChanges().pipe(
+      map(changes => {
+        return changes.map(c => {
+          return ({ ...(c.payload.doc.data() as ProductModel), id: c.payload.doc.id })
+        });
+      })
     );
   }
 
-  // Get specific shopping list
-  getShoppingListById(id: string): Observable<ShoppingListModel> {
-    return this.firestore.collection('shopping-lists').doc(id).snapshotChanges().pipe(
-      map(changes => {
-        return { id: changes.payload.id, ...changes.payload.data() as ShoppingListModel }
-      })
-    )
+  // Update product in shopping list
+  updateProduct(product: ProductModel): Promise<void> {
+    return this.firestore.collection('shoppinglist').doc(product.id).set(product, { merge: true });
   }
 
-  // Update shopping list
-  updateShoppingList(shoppingList: ShoppingListModel): Promise<void> {
-    return this.firestore.collection('shopping-lists').doc(shoppingList.id).set(shoppingList, { merge: true });
+  // Update product from shopping list
+  deleteProductFromShoppingList(id: string): Promise<void> {
+    return this.firestore.collection('shoppinglist').doc(id).delete();
   }
 
-  // Create new shopping list
-  createShoppingList(shoppingList: ShoppingListModel): Promise<void | DocumentReference<unknown>> {
-    return this.firestore.collection('shopping-lists').add(shoppingList).then(ref => {
+  // Create new product in shopping list
+  createNewProductInList(product: ProductModel): Promise<void | DocumentReference<unknown>> {
+    return this.firestore.collection('shoppinglist').add(product).then(ref => {
       ref.set({ id: ref.id }, { merge: true });
     });
-  }
-
-  // Delete shopping list
-  deleteShoppingList(id: string): Promise<void> {
-    return this.firestore.collection('shopping-lists').doc(id).delete();
   }
 
   // Get all categories (sorted)

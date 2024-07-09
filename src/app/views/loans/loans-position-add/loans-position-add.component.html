@@ -1,4 +1,4 @@
-<form class="add-loan-position" [formGroup]="positionForm">
+<form class="add-loan-position main-padding-20" [formGroup]="positionForm">
     <mat-form-field>
         <mat-label>Opis</mat-label>
         <input matInput formControlName="description">
@@ -19,7 +19,7 @@
         color="primary"
         [disabled]="positionForm.invalid"
         (click)="add()">
-        Dodaj nową pozycję dla {{ loan.who }}
+        Dodaj nową pozycję dla {{ loan?.who }}
     </button>
 </form>
   

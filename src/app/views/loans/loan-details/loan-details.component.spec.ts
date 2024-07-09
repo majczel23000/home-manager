@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoanDetailsComponent } from './loan-details.component';
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from 'src/environments/environment';
+import { importProvidersFrom } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('LoanDetailsComponent', () => {
   let component: LoanDetailsComponent;
@@ -8,7 +12,13 @@ describe('LoanDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LoanDetailsComponent]
+      imports: [
+        LoanDetailsComponent,
+        RouterTestingModule,
+      ],
+      providers: [
+        importProvidersFrom([AngularFireModule.initializeApp(environment.firebaseConfig)]),
+      ]
     })
     .compileComponents();
     
